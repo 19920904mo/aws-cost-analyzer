@@ -1,0 +1,24 @@
+AWS Cost Analyzer Template
+Copyright 2025 [Masato Okawa]
+
+This project uses the following third-party libraries:
+
+- Mastra Framework (Apache License 2.0)
+  https://mastra.ai/
+  
+- OpenAI SDK (MIT License)
+  https://github.com/openai/openai-node
+  
+- AWS SDK for JavaScript (Apache License 2.0)
+  https://github.com/aws/aws-sdk-js-v3
+  
+- chrono-node (MIT License)
+  https://github.com/wanasit/chrono
+  
+- Pino (MIT License)
+  https://github.com/pinojs/pino
+  
+- Zod (MIT License)
+  https://github.com/colinhacks/zod
+
+For full license texts, see the respective project repositories. 
