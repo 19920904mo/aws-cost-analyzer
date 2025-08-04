@@ -108,13 +108,13 @@ https://github.com/user-attachments/assets/6290e9f6-85e7-461b-9ce1-4545d6c1bf08
 
 ### Basic Cost Inquiry
 
-User: "What’s the AWS cost this month?"
-Agent: "The total AWS cost for August 2025 is effectively $0.00 USD.〜〜"
+- **User:** "What’s the AWS cost this month?"
+- **Agent:** "The total AWS cost for August 2025 is effectively $0.00 USD.〜〜"
 
 ### Date-Specific Analysis
 
-User: "What was the cost for May 2025?"
-Agent: "The AWS cost for May 2025 was $7.69 USD. Here's a detailed breakdown and analysis:〜〜"
+- **User:** "What was the cost for May 2025?"
+- **Agent:** "The AWS cost for May 2025 was $7.69 USD. Here's a detailed breakdown and analysis:〜〜"
 
 ## Architecture
 
