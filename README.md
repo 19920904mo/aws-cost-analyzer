@@ -217,13 +217,13 @@ src/mastra/
 
 ## Current Features
 
-✅ **Natural Language Cost Query:** Instantly answer "What’s the AWS cost this month?"
-✅ **Month-Over-Month Comparison:** Automatically calculate cost changes
-✅ **Service Breakdown:** Visualize cost by AWS service
-✅ **Robust Error Handling:** 7-category AWS error classification
-✅ **Structured Logging:** Compatible with both development and production
-✅ **Type-Safe Design:** Environment variable validation with Zod
-✅ **High-Quality Library Integration:** Uses industry-standard libraries like chrono-node and Pino
+- ✅ **Natural Language Cost Query:** Instantly answer "What’s the AWS cost this month?"
+- ✅ **Month-Over-Month Comparison:** Automatically calculate cost changes
+- ✅ **Service Breakdown:** Visualize cost by AWS service
+- ✅ **Robust Error Handling:** 7-category AWS error classification
+- ✅ **Structured Logging:** Compatible with both development and production
+- ✅ **Type-Safe Design:** Environment variable validation with Zod
+- ✅ **High-Quality Library Integration:** Uses industry-standard libraries like chrono-node and Pino
 
 ## Customization Guide
 
