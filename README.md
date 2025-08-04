@@ -102,6 +102,10 @@ Follow the steps below to create an IAM user with the necessary permissions for 
 
 
 
+https://github.com/user-attachments/assets/6290e9f6-85e7-461b-9ce1-4545d6c1bf08
+
+
+
 ### Basic Cost Inquiry
 
 User: "What’s the AWS cost this month?"
