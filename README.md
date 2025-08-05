@@ -22,7 +22,7 @@ This template provides a practical AI agent for AWS cost management:
 
 - **Natural Language Queries:** e.g., “What was the cost for May 2025?” → Automatically parses the date and builds the query
 - **Month-over-Month Comparison:** Displays increases or decreases in cost as a percentage
-- **Service Breakdown:** Visualizes the cost distribution by AWS service
+- **Service Breakdown:** Shows the cost distribution by AWS service
 - **Production-Ready Design:** Built for stable operation with error handling and structured logging
 
 ## Prerequisites
