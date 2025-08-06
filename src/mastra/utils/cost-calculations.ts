@@ -21,29 +21,6 @@ export function calculatePercentageChange(current: number, previous: number): nu
 }
 
 /**
- * Calculate amount difference
- * @param current - Current amount
- * @param previous - Previous amount
- * @returns Amount difference
- */
-export function calculateAmountChange(current: number, previous: number): number {
-  return Math.round((current - previous) * 100) / 100;
-}
-
-/**
- * Calculate cost composition ratio
- * @param partialCost - Partial cost
- * @param totalCost - Total cost
- * @returns Composition ratio percentage
- */
-export function calculatePercentage(partialCost: number, totalCost: number): number {
-  if (totalCost === 0) return 0;
-  
-  const percentage = (partialCost / totalCost) * 100;
-  return Math.round(percentage * 100) / 100;
-}
-
-/**
  * Determine trend (MVP)
  * @param percentageChange - Percentage change
  * @param threshold - Change threshold (default 5%)
@@ -126,54 +103,10 @@ export function generateCostSummary(data: ProcessedCostData): string {
                    data.trends.trend === 'decreasing' ? 'decrease' : 'stable';
   
   // Add top services information
-  const topServices = getTopServices(data.services, 3);
+  const topServices = getTopServices(data.services, 5);
   const topServiceText = topServices.map(s => 
     `${s.name} (${formatCurrency(s.cost)}, ${formatPercentage(s.percentage, false)})`
   ).join(', ');
   
   return `Total cost for ${period} was ${formattedCost}, showing ${formatPercentage(percentageChange)} ${trendText} compared to previous period. Top costs: ${topServiceText}`;
-}
-
-/**
- * Generate cost optimization suggestions
- * @param services - Service cost data
- * @param threshold - Minimum cost threshold for suggestions (default: $100)
- * @returns Array of cost optimization suggestions
- */
-export function generateCostOptimizationSuggestions(
-  services: ServiceCostData[], 
-  threshold: number = 100
-): string[] {
-  const suggestions: string[] = [];
-  const topServices = getTopServices(services, 5);
-  
-  for (const service of topServices) {
-    if (service.cost < threshold) continue;
-    
-    switch (service.name) {
-      case 'Amazon Elastic Compute Cloud - Compute':
-        suggestions.push(
-          `EC2 instances (${formatCurrency(service.cost)}): Consider Reserved Instances for 20-40% cost savings.`
-        );
-        break;
-      case 'Amazon Simple Storage Service':
-        suggestions.push(
-          `S3 storage (${formatCurrency(service.cost)}): Consider Intelligent-Tiering and lifecycle policies.`
-        );
-        break;
-      case 'Amazon Relational Database Service':
-        suggestions.push(
-          `RDS (${formatCurrency(service.cost)}): Consider right-sizing and Reserved Instances.`
-        );
-        break;
-      default:
-        if (service.cost > 500) {
-          suggestions.push(
-            `${service.name} (${formatCurrency(service.cost)}): Review usage patterns and optimization opportunities.`
-          );
-        }
-    }
-  }
-  
-  return suggestions;
 } 
