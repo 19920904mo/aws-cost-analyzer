@@ -22,7 +22,7 @@ This template provides a practical AI agent for AWS cost management:
 
 - **Natural Language Queries:** e.g., “What was the cost for May 2025?” → Automatically parses the date and builds the query
 - **Month-over-Month Comparison:** Displays increases or decreases in cost as a percentage
-- **Service Breakdown:** Shows the cost distribution by AWS service
+- **Service Breakdown:** Shows the cost distribution by AWS service (top 5 services by cost) 
 - **Production-Ready Design:** Built for stable operation with error handling and structured logging
 
 ## Prerequisites
@@ -188,7 +188,7 @@ aws-cost-analyzer/
 **utils/cost-calculations.ts:** 
 - **Month-over-month calculation:** `calculatePercentageChange()` computes percentage deltas
 - **Trend detection:** `determineTrend()` classifies as `increasing / stable / decreasing` based on a ±5% threshold
-- **Summarization and suggestions:** `generateCostSummary()` and `generateCostOptimizationSuggestions()` provide actionable recommendations (e.g., usage reviews)
+- **Summarization:** `generateCostSummary()` provides cost analysis summaries
 
 ### 7. Architectural Pattern
 
@@ -223,7 +223,7 @@ src/mastra/
 
 - ✅ **Natural Language Cost Query:** Instantly answer "What’s the AWS cost this month?"
 - ✅ **Month-Over-Month Comparison:** Automatically calculate cost changes
-- ✅ **Service Breakdown:** Visualize cost by AWS service
+- ✅ **Service Breakdown:** Show cost by AWS service (top 5 services by cost) 
 - ✅ **Robust Error Handling:** 7-category AWS error classification
 - ✅ **Structured Logging:** Compatible with both development and production
 - ✅ **Type-Safe Design:** Environment variable validation with Zod
