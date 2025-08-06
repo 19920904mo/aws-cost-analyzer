@@ -29,10 +29,7 @@ export const awsCostFetcher = createTool({
   id: 'aws-cost-fetcher',
   description: 'Dynamically calculate dates from user natural language queries and retrieve & analyze cost data from AWS Cost Explorer API',
   inputSchema: z.object({
-    userQuery: z.string().describe('User natural language query (e.g., "What\'s this month\'s AWS cost?")'),
-    // Optional parameters (for manual specification only)
-    startDate: z.string().optional().describe('Manual start date (YYYY-MM-DD)'),
-    endDate: z.string().optional().describe('Manual end date (YYYY-MM-DD)')
+    userQuery: z.string().describe('User natural language query (e.g., "What\'s this month\'s AWS cost?")')
   }),
   outputSchema: z.object({
     success: z.boolean(),
@@ -65,17 +62,14 @@ export const awsCostFetcher = createTool({
         };
       }
 
-      const { userQuery, startDate: manualStartDate, endDate: manualEndDate } = context;
+      const { userQuery } = context;
 
-      log.debug('Context details', { userQuery, manualStartDate, manualEndDate }, '🧪');
-
-      // 🚨 To avoid LLM generating old dates, ignore manual dates and always use dynamic calculation
-      log.warn('Ignoring manual date parameters and executing dynamic calculation');
+      log.debug('Context details', { userQuery }, '🧪');
       const extractedPeriod = extractPeriodFromQuery(userQuery);
       
       log.info('Period calculation result', { extractedPeriod }, '🔍');
       
-      log.info('Dynamic date calculation result', {
+      log.info('Date calculation result', {
         userQuery,
         extractedPeriod,
         currentDate: getCurrentDate()
