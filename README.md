@@ -148,7 +148,8 @@ aws-cost-analyzer/
 ### Tech Stack
 
 - **Framework:** [Mastra](https://mastra.ai) - TypeScript agent framework
-- **LLM:** OpenAI GPT-4 - Natural language understanding
+- **LLM:** OpenAI GPT-4o - Natural language understanding
+  - Recommend using OpenAI, Anthropic, or Google model providers. Choose the provider that best fits your use case.
 - **AWS Integration:**
   - [@aws-sdk/client-cost-explorer (npm)](https://www.npmjs.com/package/@aws-sdk/client-cost-explorer) - Official SDK package to access Cost Explorer API
   - [Cost Explorer API Reference (AWS Docs)](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/cost-explorer/) - Detailed specs and usage
