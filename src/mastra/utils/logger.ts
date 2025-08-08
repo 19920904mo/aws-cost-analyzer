@@ -31,7 +31,7 @@ export const log = {
    * @param data - Additional structured data
    * @param emoji - Custom emoji (default: ℹ️)
    */
-  info: (msg: string, data?: any, emoji: string = 'ℹ️') => {
+  info: (msg: string, data?: Record<string, unknown>, emoji: string = 'ℹ️') => {
     try {
       logger.info({ ...data, emoji }, msg);
     } catch (error) {
@@ -45,7 +45,7 @@ export const log = {
    * @param data - Additional structured data
    * @param emoji - Custom emoji (default: ❌)
    */
-  error: (msg: string, data?: any, emoji: string = '❌') => {
+  error: (msg: string, data?: Record<string, unknown>, emoji: string = '❌') => {
     try {
       logger.error({ ...data, emoji }, msg);
     } catch (error) {
@@ -59,7 +59,7 @@ export const log = {
    * @param data - Additional structured data
    * @param emoji - Custom emoji (default: ⚠️)
    */
-  warn: (msg: string, data?: any, emoji: string = '⚠️') => {
+  warn: (msg: string, data?: Record<string, unknown>, emoji: string = '⚠️') => {
     try {
       logger.warn({ ...data, emoji }, msg);
     } catch (error) {
@@ -73,7 +73,7 @@ export const log = {
    * @param data - Additional structured data
    * @param emoji - Custom emoji (default: 🐛)
    */
-  debug: (msg: string, data?: any, emoji: string = '🐛') => {
+  debug: (msg: string, data?: Record<string, unknown>, emoji: string = '🐛') => {
     try {
       logger.debug({ ...data, emoji }, msg);
     } catch (error) {
@@ -86,7 +86,7 @@ export const log = {
    * @param msg - Success message
    * @param data - Additional structured data
    */
-  success: (msg: string, data?: any) => {
+  success: (msg: string, data?: Record<string, unknown>) => {
     try {
       logger.info({ ...data, emoji: '✅' }, msg);
     } catch (error) {
@@ -99,7 +99,7 @@ export const log = {
    * @param msg - Process message
    * @param data - Additional structured data
    */
-  process: (msg: string, data?: any) => {
+  process: (msg: string, data?: Record<string, unknown>) => {
     try {
       logger.info({ ...data, emoji: '⚙️' }, msg);
     } catch (error) {
@@ -112,7 +112,7 @@ export const log = {
    * @param msg - API message
    * @param data - Additional structured data
    */
-  api: (msg: string, data?: any) => {
+  api: (msg: string, data?: Record<string, unknown>) => {
     try {
       logger.info({ ...data, emoji: '🌐' }, msg);
     } catch (error) {
@@ -125,7 +125,7 @@ export const log = {
    * @param msg - Cost message
    * @param data - Additional structured data
    */
-  cost: (msg: string, data?: any) => {
+  cost: (msg: string, data?: Record<string, unknown>) => {
     try {
       logger.info({ ...data, emoji: '💰' }, msg);
     } catch (error) {

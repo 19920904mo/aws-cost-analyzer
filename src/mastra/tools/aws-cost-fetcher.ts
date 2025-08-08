@@ -18,7 +18,7 @@ import {
 import { getMonthRange, getCurrentDate } from '../utils/date-helpers.js';
 import { handleAWSError } from '../utils/error-handlers.js';
 import { log } from '../utils/logger.js';
-
+import { env } from '../config/env.js';
 
 
 /**
@@ -54,14 +54,7 @@ export const awsCostFetcher = createTool({
 
   execute: async ({ context }) => {
     try {
-      // Check environment variables
-      if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
-        return {
-          success: false,
-          error: 'AWS credentials not configured. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.'
-        };
-      }
-
+      // Environment variables are already validated by Zod in env.ts
       const { userQuery } = context;
 
       log.debug('Context details', { userQuery }, '🧪');
@@ -75,12 +68,12 @@ export const awsCostFetcher = createTool({
         currentDate: getCurrentDate()
       }, '🕐');
 
-      // Initialize Cost Explorer client
+      // Initialize Cost Explorer client using type-safe env
       const client = new CostExplorerClient({
-        region: process.env.AWS_DEFAULT_REGION || 'us-east-1',
+        region: env.AWS_DEFAULT_REGION,
         credentials: {
-          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+          accessKeyId: env.AWS_ACCESS_KEY_ID,
+          secretAccessKey: env.AWS_SECRET_ACCESS_KEY
         }
       });
 
@@ -114,18 +107,19 @@ export const awsCostFetcher = createTool({
         data: processedData
       };
 
-    } catch (error: any) {
-      log.error('AWS Cost Fetcher Error', { error: error.message, stack: error.stack }, '🚨');
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      log.error('AWS Cost Fetcher Error', { error: err.message, stack: err.stack }, '🚨');
       
       // Handle AWS-specific errors
-      if (error.name === 'ValidationException') {
+      if (err.name === 'ValidationException') {
         return {
           success: false,
-          error: `AWS Cost Explorer data limitation: ${error.message}`
+          error: `AWS Cost Explorer data limitation: ${err.message}`
         };
       }
 
-      const errorResponse = handleAWSError(error);
+      const errorResponse = handleAWSError(err);
       return {
         success: false,
         error: errorResponse.error

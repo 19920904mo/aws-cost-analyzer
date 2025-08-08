@@ -3,6 +3,8 @@
  * Unified processing for AWS API and other errors
  */
 
+import { log } from './logger.js';
+
 /**
  * AWS Error Types
  */
@@ -32,13 +34,14 @@ export interface ErrorResponse {
  * @param error - Caught error
  * @returns Structured error response
  */
-export function handleAWSError(error: any): ErrorResponse {
+export function handleAWSError(error: unknown): ErrorResponse {
   if (!error) {
     return createErrorResponse(AWSErrorType.UNKNOWN, 'Unknown error occurred');
   }
 
-  const errorMessage = error.message || error.toString();
-  const errorName = error.name || '';
+  const err = error instanceof Error ? error : new Error(String(error));
+  const errorMessage = err.message || err.toString();
+  const errorName = err.name || '';
 
   // Authentication errors
   if (errorMessage.includes('The security token included in the request is invalid') ||
@@ -193,26 +196,21 @@ function createErrorResponse(
  */
 export function logStructuredError(
   context: string,
-  error: any,
-  additionalInfo?: any
+  error: unknown,
+  additionalInfo?: Record<string, unknown>
 ): void {
+  const err = error instanceof Error ? error : new Error(String(error));
   const errorInfo = {
     timestamp: new Date().toISOString(),
     context,
     error: {
-      message: error.message || error.toString(),
-      name: error.name || 'UnknownError',
-      stack: error.stack
+      message: err.message || err.toString(),
+      name: err.name || 'UnknownError',
+      stack: err.stack
     },
     additionalInfo
   };
 
-  // Try to use Pino logger, fallback to console on error
-  try {
-    const { log } = require('./logger.js');
-    log.error('Structured Error Log', errorInfo, '🚨');
-  } catch (loggerError) {
-    // Fallback to console if Pino fails
-    console.error('🚨 Structured Error Log:', JSON.stringify(errorInfo, null, 2));
-  }
+  // Use imported logger directly
+  log.error('Structured Error Log', errorInfo, '🚨');
 } 
