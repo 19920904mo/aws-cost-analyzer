@@ -41,7 +41,6 @@ export function handleAWSError(error: unknown): ErrorResponse {
 
   const err = error instanceof Error ? error : new Error(String(error));
   const errorMessage = err.message || err.toString();
-  const errorName = err.name || '';
 
   // Authentication errors
   if (errorMessage.includes('The security token included in the request is invalid') ||
