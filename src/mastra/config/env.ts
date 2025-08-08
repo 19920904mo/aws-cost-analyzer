@@ -25,11 +25,11 @@ const envSchema = z.object({
 
   AWS_DEFAULT_REGION: z
     .string()
-    .default('us-east-1')
     .refine(
       (region) => /^[a-z]{2}-[a-z]+-[0-9]$/.test(region),
       'AWS region must be in format like "us-east-1"'
-    ),
+    )
+    .default('us-east-1'),
 
   // Optional Configuration
   LOG_LEVEL: z
